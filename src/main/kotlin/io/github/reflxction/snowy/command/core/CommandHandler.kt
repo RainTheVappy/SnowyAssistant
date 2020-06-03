@@ -99,7 +99,7 @@ class CommandHandler(var jda: JDA) : EventListener {
         val member = e.member ?: return
         val event: GuildMessageReceivedEvent = e
         val commandText = event.message.contentRaw.substring(1).split(" ".toRegex(), 2).toTypedArray()
-        val wrapper = commands[commandText[0]] ?: return
+        val wrapper = commands[commandText[0].toLowerCase()] ?: return
         val context = CommandContext(if (commandText.size == 1) "" else commandText[1], event, wrapper, resolvers)
         try {
             for (permission in wrapper.permissions)
